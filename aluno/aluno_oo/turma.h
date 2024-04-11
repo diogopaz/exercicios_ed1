@@ -47,7 +47,8 @@ class Turma {
 
         bool matricula(Aluno* a) {
             if(qtde >= tam_vetor) {
-                cout << "Erro" << endl;
+                cout << "Erro, turma lotada" << endl;
+                return 0;
             };
             this->alunos[qtde] = a;
             qtde++;

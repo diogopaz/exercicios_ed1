@@ -5,21 +5,27 @@
 using namespace std;
 
 int main() {
-   Aluno* a1 = new Aluno("a111", "Joao");
-   Aluno* a2 = new Aluno("a222", "Maria");
-   Turma* t1 = new Turma("2024-1", 100);    
-   a1->setRa("a000");
+ 
+   Turma* ed1 = new Turma("2024-1", 42);
+   ed1->setCod_disciplina("bcc3001");
+   ed1->setCod_turma("ic3a");
 
-   t1->matricula(a1);
-   t1->matricula(a2);
-   // delete(t1);
-   // delete(a1);
-   t1->cancela_matricula("a000");
-   // t1->cancela_matricula("a222");
-   t1->imprimir_alunos();
-   // a1->imprimir();
-   // delete(a2);
-   delete(t1);
+   Aluno* a1 = new Aluno("a111", "Joao");
+   Aluno* a2 = new Aluno("a777", "Maria");
+   Aluno* a3 = new Aluno("a894", "Cleber");
+   Aluno* a4 = new Aluno("a005", "Fernanda");
+
+   ed1->matricula(a1);
+   ed1->matricula(a3);
+   ed1->matricula(a2);
+
+   ed1->imprimir_alunos();
+
+   ed1->cancela_matricula(a1->getRa());
+
+   ed1->imprimir_alunos();
+
+   delete ed1;
 
    return 0;
 }
