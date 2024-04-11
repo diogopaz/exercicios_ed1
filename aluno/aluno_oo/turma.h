@@ -1,42 +1,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include "aluno.h"
 
 using namespace std;
-
-class Aluno {
-    private:
-        string ra;
-        string nome;
-
-    public:
-        Aluno(string ra, string nome) {
-            this->ra = ra;
-            this->nome = nome;
-        }
-
-        ~Aluno() {
-            cout << "Destruindo Aluno " << this->nome << endl;
-        }
-
-        string getRa() {
-            return this->ra;
-        }
-        void setRa(string ra) {
-            this->ra = ra;
-        }
-
-        string getNome() {
-            return this->nome;
-        }
-        void setNome(string nome) {
-            this->nome = nome;
-        }
-
-        void imprimir() {
-            cout << "(" << this->ra << ", " << this->nome << ")" << endl;
-        }
-};
 
 class Turma {
     private:
@@ -52,12 +19,16 @@ class Turma {
         Turma(string semestre, int tam_vetor) {
             this->semestre = semestre;
             this->alunos = new Aluno*[tam_vetor];
+
             this->tam_vetor = tam_vetor;
             this->qtde = 0;
         }
 
         ~Turma() {
-            cout << "Destruindo Turma " << this->semestre << endl;
+            for(int i = 0; i < qtde; i++) {
+                this->alunos[i]->~Aluno();
+            }
+            cout << "Turma destruída"<< endl;
         }
 
         string getCod_disciplina() {
@@ -85,19 +56,20 @@ class Turma {
         }
 
         int cancela_matricula(string ra) {
-            for(int i = 0; i < this->tam_vetor; i++) {
+            for(int i = 0; i < this->qtde; i++) {
                 if(this->alunos[i]->getRa() == ra) {
                     cout << "Matricula do aluno " << this->alunos[i]->getNome() << " cancelada"<< endl;
-                    this->alunos[i] = 0;
+                    for(int j = i; j < this->tam_vetor-1; j++) {
+                        this->alunos[j] = this->alunos[j+1];
+                    }
+                    qtde--;
                 }
             }
         }
 
         void imprimir_alunos() {
-            for(int i = 0; i < tam_vetor; i++) {
-                if (this->alunos[i] != nullptr) {
-                    this->alunos[i]->imprimir();
-                }
+            for(int i = 0; i < qtde; i++) {
+                this->alunos[i]->imprimir();
             }
         }
 };

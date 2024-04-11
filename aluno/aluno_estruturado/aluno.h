@@ -9,8 +9,6 @@ typedef struct {
 } Aluno;
 
 Aluno* aluno_criar(string ra, string nome);
-
-
 void aluno_imprimir(Aluno* a);
 void aluno_destruir(Aluno* a);
 

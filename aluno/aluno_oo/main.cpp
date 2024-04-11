@@ -15,8 +15,11 @@ int main() {
    // delete(t1);
    // delete(a1);
    t1->cancela_matricula("a000");
-   t1->cancela_matricula(a2->getRa());
+   // t1->cancela_matricula("a222");
    t1->imprimir_alunos();
+   // a1->imprimir();
+   // delete(a2);
+   delete(t1);
 
    return 0;
 }
