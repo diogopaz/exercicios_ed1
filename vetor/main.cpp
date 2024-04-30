@@ -1,5 +1,7 @@
-
+#include <iostream>
 #include <string>
+
+using namespace std;
 
 class Vetor{
 
@@ -15,46 +17,102 @@ class Vetor{
         // Insere o elemento e na última posição
         bool push_back(int e) {
             this->array[size] = e;
-            size++;
+            this->size++;
+            return 1;
         };
+
         // Insere o elemento e na primeira posição
         bool push_front(int e) {
             for(int i = size; i > 0; i--) {
                 this->array[i] = this->array[i-1];
             }
             this->array[0] = e;
-            size++;
+            this->size++;
+            return 1;
         };
+        
         // Insere o elemento e na posição pos
-        bool insert(int pos, int e);
+        bool insert(int pos, int e) {
+            for(int i = size; i > pos; i--) {
+                this->array[i] = this->array[i-1];
+            }
+            this->array[pos] = e;
+            this->size++;
+        };
 
         // Remove o último elemento
-        int pop_back();
+        int pop_back() {
+            int removed = this->array[size-1];
+            this->array[size-1] = NULL;
+            this->size--;
+            return removed;
+        };
+
         // Remove o primeiro elemento
-        int pop_front();
+        int pop_front() {
+            int removed = this->array[0];
+            for(int i = 0; i < size-1; i++) {
+                this->array[i] = this->array[i+1];
+            }
+            this->size--;
+            return removed;
+        };
+
         // Remove o elemento da posição pos e retorna o elemento removido
-        int erase(int pos);
+        int erase(int pos) {
+            int removed = this->array[pos];
+            for(int i = pos; i < size; i++) {
+                this->array[i] = this->array[i+1];
+            }
+            this->size--;
+            return removed;
+        };
 
 
         // Retorna o primeiro elemento
-        int front();
+        int front() {
+            return this->array[0];
+        };
         // Retorna o último elemento
-        int back();
+        int back() {
+            return this->array[size-1];
+        };
         // Retorna o elemento da posição pos
-        int at(int pos);
+        int at(int pos) {
+            return this->array[pos];
+        };
 
         // Torna a lista vazia
-        void clear();
+        void clear() {
+            this->array = nullptr;
+        };
 
         // Verifica se o vetor está vazio
-        bool empty();
+        bool empty() {
+            return this->array == nullptr ? 1 : 0;
+        };
+
         // Devolve a quantidade de elementos
-        int size();
+        int size() {
+            return this->size;
+        };
         // Substitui o elemento da posição pos pelo elemento e
-        bool replace(int pos, int e);
+        bool replace(int pos, int e) {
+            this->array[pos] = e;
+            return 1;
+        };
 
         // Imprime todos os elementos no formato [1,2,3]
-        void print();
+        void print() {
+            cout << "[";
+            for(int i = 0; i < size; i++) {
+                cout << this->array[i];
+                if(i+1 < size) {
+                    cout << ",";
+                }
+            }
+            cout << "]" << endl;
+        };
 
     private:
 	    // Dobrar a capacidade quando não houver mais espaço
