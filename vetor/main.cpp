@@ -13,9 +13,18 @@ class Vetor{
         ~Vetor();
 
         // Insere o elemento e na última posição
-        bool push_back(int e);
+        bool push_back(int e) {
+            this->array[size] = e;
+            size++;
+        };
         // Insere o elemento e na primeira posição
-        bool push_front(int e);
+        bool push_front(int e) {
+            for(int i = size; i > 0; i--) {
+                this->array[i] = this->array[i-1];
+            }
+            this->array[0] = e;
+            size++;
+        };
         // Insere o elemento e na posição pos
         bool insert(int pos, int e);
 
